@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teenu Cabs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #131d34;
+      color: #eac14f;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      padding: 32px 60px 12px 60px;
+      background: #131d34;
+    }
+    #logo {
+      height: 110px;
+      margin-right: 40px;
+      display: block;
+    }
+    nav {
+      margin-left: auto;
+    }
+    nav a {
+      color: #eac14f;
+      text-decoration: none;
+      margin: 0 24px;
+      font-weight: bold;
+      font-size: 22px;
+      letter-spacing: 1px;
+      transition: border-bottom 0.2s;
+    }
+    nav a:hover {
+      border-bottom: 2px solid #eac14f;
+    }
+    main {
+      max-width: 1300px;
+      margin: 50px auto 0;
+      background: #1c2747;
+      padding: 50px 70px 60px 70px;
+      border-radius: 22px;
+      box-shadow: 0 2px 25px rgba(0,0,0,0.16);
+    }
+    h1, h2 {
+      color: #eac14f;
+      margin-bottom: 24px;
+    }
+    .about {
+      margin-bottom: 30px;
+    }
+    .contact-details {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    
+    /* Hero Section with Animation */
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      gap: 40px;
+    }
+    .hero-text {
+      flex: 1;
+    }
+    .hero-image {
+      flex: 1;
+      text-align: right;
+    }
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Welcome Title - No Animation */
+    .welcome-title {
+      font-size: 48px;
+      font-weight: 900;
+      color: #eac14f;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+    
+    /* Our Services section - ENLARGED */
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+    .car-card {
+      background: #202b50;
+      padding: 35px 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .car-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(234, 193, 79, 0.3);
+    }
+    .car-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #131d34;
+      margin-bottom: 20px;
+    }
+    .car-card strong {
+      font-size: 26px;
+      color: #eac14f;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .car-card div {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #d4c89e;
+    }
+    
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #202b50;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .pricing-table th, .pricing-table td {
+      padding: 14px 14px;
+      border-bottom: 1px solid #2d3a60;
+      text-align: left;
+      font-size: 18px;
+    }
+    .pricing-table th {
+      background: #252f53;
+      color: #eac14f;
+      font-weight: 600;
+      font-size: 20px;
+    }
+    
+    /* Why Choose Us Section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 35px;
+      margin-top: 30px;
+    }
+    .feature-card {
+      background: #202b50;
+      padding: 30px 25px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .feature-icon {
+      font-size: 60px;
+      margin-bottom: 18px;
+      color: #4a9d5f;
+    }
+    .feature-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #eac14f;
+      margin-bottom: 14px;
+    }
+    .feature-description {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #d4c89e;
+    }
+    
+    /* Review section */
+    .review {
+      background: #202b50;
+      border-radius: 10px;
+      padding: 22px 20px 14px 20px;
+      margin-bottom: 18px;
+      font-size: 18px;
+    }
+    .review-author {
+      font-weight: bold;
+      color: #eac14f;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    
+    /* Contact Us section */
+    .contact-info {
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+    .whatsapp-btn, .mail-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #eac14f;
+      color: #131d34;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background 0.2s;
+      margin-right: 22px;
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+    .whatsapp-btn:hover, .mail-btn:hover {
+      background: #d2aa48;
+    }
+    section {
+      margin-bottom: 60px;
+    }
+    section:last-child {
+      margin-bottom: 0;
+    }
+    @media (max-width: 800px) {
+      main {
+        padding: 18px;
+        max-width: 98vw;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 10px 8px 10px;
+      }
+      #logo {
+        height: 80px;
+        margin-bottom: 18px;
+      }
+      nav {
+        margin: 12px 0 0 0;
+      }
+      .car-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-section {
+        flex-direction: column;
+      }
+      .hero-image {
+        text-align: center;
+      }
+      .welcome-title {
+        font-size: 32px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="TC-Websitepurpose.png" id="logo" alt="Teenu Cabs Logo">
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Our Services</a>
+      <a href="#why-choose-us">Why Choose Us</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+  </header>
+  <main>
+    <!-- Home Section -->
+    <section id="home">
+      <div class="hero-section">
+        <div class="hero-text">
+          <h1 class="welcome-title">Welcome to Teenu Cabs</h1>
+          <div class="contact-details">
+            <strong>Contact :</strong> +91-9876543210
+          </div>
+          <div class="about">
+            <h2>About Us</h2>
+            <p>
+              Teenu Cabs is Chennai's trusted car rental service providing reliable, comfortable, and safe rides since 2020. Whether you need airport transfers, city sightseeing, or outstation travel, our diverse fleet and professional drivers are here for you!
+            </p>
+            <ul>
+              <li>Wide range of cars to suit every need</li>
+              <li>Competitive pricing for daily and weekly rentals</li>
+              <li>24/7 customer support</li>
+            </ul>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80" alt="Luxury Car">
+        </div>
+      </div>
+    </section>
+    
+    <!-- Our Services Section -->
+    <section id="services">
+      <h1>Our Services</h1>
+      <div class="car-grid">
+        <div class="car-card">
+          <img src="mini.jpg" alt="Mini">
+          <strong>Mini</strong>
+          <div>Compact & Economic – Perfect for solo travelers and quick errands.</div>
+        </div>
+        <div class="car-card">
+          <img src="sedan.avif" alt="Sedan">
+          <strong>Sedan</strong>
+          <div>Comfortable and stylish – Perfect for city rides and business travel.</div>
+        </div>
+        <div class="car-card">
+          <img src="car2.webp" alt="SUV">
+          <strong>SUV</strong>
+          <div>Spacious and powerful – Great for family and group travel.</div>
+        </div>
+      </div>
+      <h2>Pricing</h2>
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Car Type</th>
+            <th>1 Day</th>
+            <th>3 Days</th>
+            <th>7 Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mini</td>
+            <td>₹1000</td>
+            <td>₹2,500</td>
+            <td>₹5,000</td>
+          </tr>
+          <tr>
+            <td>Sedan</td>
+            <td>₹1,200</td>
+            <td>₹3,000</td>
+            <td>₹7,000</td>
+          </tr>
+          <tr>
+            <td>SUV</td>
+            <td>₹1,500</td>
+            <td>₹5,000</td>
+            <td>₹10,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us">
+      <h1>Why Choose Teenu Cabs for your intercity travels?</h1>
+      <h2 style="font-size: 24px; margin-bottom: 30px;">Chennai's Most Reliable CAB Rentals</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🧾</div>
+          <div class="feature-title">Lower Fares</div>
+          <div class="feature-description">
+            Travel at 5-10% Lower Fares than other outstation cabs. Cheapest Outstation Taxi in Chennai you can find.
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🕐</div>
+          <div class="feature-title">Get Cabs on-time</div>
+          <div class="feature-description">
+            Pre-book Outstation Cabs in advance and get on-time at your doorstep from anywhere in the city.
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🏷️</div>
+          <div class="feature-title">Transparent Pricing</div>
+          <div class="feature-description">
+            Transparent Pricing all inclusive of fares like toll, parking.
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">👨‍✈️</div>
+          <div class="feature-title">Professional & Quality Drivers</div>
+          <div class="feature-description">
+            Well-behaved, professional and friendly drivers.
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🚗</div>
+          <div class="feature-title">Well-maintained Cars</div>
+          <div class="feature-description">
+            Cleaner and recent cars for a pleasant travel experience.
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎧</div>
+          <div class="feature-title">24x7 Customer Support</div>
+          <div class="feature-description">
+            Best in class customer support at your services for a seamless experience.
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Reviews Section -->
+    <section id="reviews">
+      <h1>Customer Reviews</h1>
+      <div class="review">
+        "Fantastic service! The car was clean, comfortable, and the driver was very polite. Will book again."
+        <div class="review-author">- Deepak, Chennai</div>
+      </div>
+      <div class="review">
+        "Affordable prices and great support. Teenu Cabs made my outstation trip stress-free."
+        <div class="review-author">- Priya, Vellore</div>
+      </div>
+      <div class="review">
+        "Easy booking process and wide range of cars. Highly recommended for city travel."
+        <div class="review-author">- Arun, Chennai</div>
+      </div>
+      <div class="review">
+        "Best cab service in Chennai! The driver was on time and very professional. The SUV was very polite and adaptable according to our needs.""
+        <!-- Contact Us Section --></div>
+         <br>
+
+<section id="contact">
+  <h1>Contact Us</h1>
+  <p style="font-size: 20px; margin-bottom: 30px; color: #d4c89e;">
+    Get in touch with us for bookings, enquiries, or any assistance. We're here to help you 24/7!
+  </p>
+  
+  <div class="contact-info">
+    <div><strong>📞 Phone:</strong> +91-9876543210</div>
+    <br>
+    <div><strong>📧 Email:</strong> teenucabs@gmail.com</div>
+    <br>
+    <div><strong>💬 WhatsApp:</strong> +91-9876543210</div>
+    <br>
+    <div><strong>📍 Location:</strong> Chennai, Tamil Nadu</div>
+  </div>
+  <br>
+  <br>
+  
+  <div class="contact-buttons">
+    <a href="https://wa.me/919876543210?text=Hello%20Teenu%20Cabs!%20I%20would%20like%20to%20book%20a%20cab." target="_blank" class="whatsapp-btn">
+      💬 Connect on WhatsApp
+    </a>
+    <a href="mailto:teenucabs@gmail.com?subject=Cab%20Booking%20Enquiry&body=Hello%20Teenu%20Cabs,%0A%0AI%20would%20like%20to%20enquire%20about%20your%20cab%20rental%20services.%0A%0AThank%20you!" class="mail-btn">
+      📧 Send E-mail
+    </a>
+  </div>
+  
+  
+</section>
