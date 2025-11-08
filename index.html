@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Teenu Cabs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     body {
       margin: 0;
@@ -11,34 +12,42 @@
       background: #131d34;
       color: #eac14f;
     }
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
     header {
       display: flex;
       align-items: center;
       padding: 32px 60px 12px 60px;
       background: #131d34;
       position: relative;
+      z-index: 10;
     }
-    #logo {
-      height: 110px;
-      margin-right: 40px;
+    #logo { height: 110px; margin-right: 40px; display: block; }
+    .site-title {
+      font-size: 36px;
+      font-weight: 900;
+      color: #eac14f;
+      margin-right: auto;
+      letter-spacing: 1px;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      margin-left: auto;
+      z-index: 1010;
+    }
+    .hamburger .bar {
+      width: 32px;
+      height: 5px;
+      background: #eac14f;
+      margin: 4px 0;
+      border-radius: 3px;
       display: block;
     }
-
-    /* Hamburger menu button, hidden by default */
-    .hamburger-menu {
-      display: none;
-      background: none;
-      color: #eac14f;
-      font-size: 32px;
-      border: none;
-      margin-left: auto;
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
-
     nav {
       margin-left: auto;
       display: flex;
@@ -52,9 +61,8 @@
       letter-spacing: 1px;
       transition: border-bottom 0.2s;
     }
-    nav a:hover {
-      border-bottom: 2px solid #eac14f;
-    }
+    nav a:hover { border-bottom: 2px solid #eac14f; }
+    .nav-overlay { display: none; }
     main {
       max-width: 1300px;
       margin: 50px auto 0;
@@ -63,19 +71,11 @@
       border-radius: 22px;
       box-shadow: 0 2px 25px rgba(0,0,0,0.16);
     }
-    h1, h2 {
-      color: #eac14f;
-      margin-bottom: 24px;
+    .home-hero-container {
+      background: #1c2747;
+      border-radius: 22px;
+      margin-bottom: 18px;
     }
-    .about {
-      margin-bottom: 30px;
-    }
-    .contact-details {
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-
-    /* Hero Section with Animation */
     .hero-section {
       display: flex;
       align-items: center;
@@ -83,40 +83,42 @@
       margin-bottom: 40px;
       gap: 40px;
     }
-    .hero-text {
-      flex: 1;
-    }
-    .hero-image {
-      flex: 1;
-      text-align: right;
-    }
+    .hero-text { flex: 1; text-align: justify; }
+    .hero-image { flex: 1; text-align: right; margin-top: 60px; } /* pushes image down */
     .hero-image img {
       max-width: 100%;
       height: auto;
       border-radius: 15px;
       animation: float 3s ease-in-out infinite;
     }
-
-    /* Welcome Title - No Animation */
     .welcome-title {
       font-size: 48px;
       font-weight: 900;
       color: #eac14f;
       margin-bottom: 20px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      letter-spacing: 1.5px;
     }
-
-    /* Animations */
     @keyframes float {
-      0%, 100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
+      0%, 100% { transform: translateY(0px);}
+      50% { transform: translateY(-20px);}
     }
-
-    /* Our Services section - ENLARGED */
+    .about-text {
+      font-size: 18px;
+      line-height: 1.6;
+      font-family: 'Segoe UI';
+      text-align: justify;
+      margin-bottom: 18px;
+      color: #eac14f;
+    }
+    .about-list {
+      font-size: 17px;
+      color: #eac14f;
+      padding-left: 20px;
+      margin-bottom: 0;
+      text-align: left;
+    }
+    .about-list li { margin-bottom: 6px; line-height: 1.55; }
     .car-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -130,6 +132,8 @@
       text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       transition: transform 0.3s, box-shadow 0.3s;
+      max-width: 430px;
+      margin: 0 auto;
     }
     .car-card:hover {
       transform: translateY(-8px);
@@ -148,13 +152,9 @@
       color: #eac14f;
       display: block;
       margin-bottom: 12px;
+      font-weight: bold;
     }
-    .car-card div {
-      font-size: 18px;
-      line-height: 1.5;
-      color: #d4c89e;
-    }
-
+    .car-card div { font-size: 18px; line-height: 1.5; color: #d4c89e; }
     .pricing-table {
       width: 100%;
       border-collapse: collapse;
@@ -175,8 +175,6 @@
       font-weight: 600;
       font-size: 20px;
     }
-
-    /* Why Choose Us Section */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -189,11 +187,7 @@
       border-radius: 12px;
       text-align: center;
     }
-    .feature-icon {
-      font-size: 60px;
-      margin-bottom: 18px;
-      color: #4a9d5f;
-    }
+    .feature-icon { font-size: 60px; margin-bottom: 18px; color: #4a9d5f; }
     .feature-title {
       font-size: 22px;
       font-weight: 700;
@@ -205,8 +199,6 @@
       line-height: 1.6;
       color: #d4c89e;
     }
-
-    /* Review section */
     .review {
       background: #202b50;
       border-radius: 10px;
@@ -214,18 +206,8 @@
       margin-bottom: 18px;
       font-size: 18px;
     }
-    .review-author {
-      font-weight: bold;
-      color: #eac14f;
-      margin-top: 10px;
-      font-size: 18px;
-    }
-
-    /* Contact Us section */
-    .contact-info {
-      font-size: 20px;
-      margin-bottom: 18px;
-    }
+    .review-author { font-weight: bold; color: #eac14f; margin-top: 10px; font-size: 18px; }
+    .contact-info { font-size: 20px; margin-bottom: 18px; }
     .whatsapp-btn, .mail-btn {
       display: inline-block;
       padding: 12px 24px;
@@ -239,119 +221,195 @@
       margin-bottom: 12px;
       font-size: 18px;
     }
-    .whatsapp-btn:hover, .mail-btn:hover {
-      background: #d2aa48;
-    }
-    section {
-      margin-bottom: 60px;
-    }
-    section:last-child {
-      margin-bottom: 0;
-    }
+    .whatsapp-btn:hover, .mail-btn:hover { background: #d2aa48; }
+    section { margin-bottom: 60px; }
+    section:last-child { margin-bottom: 0; }
 
-    /* --- Mobile Styles --- */
+    /* MOBILE ONLY */
     @media (max-width: 800px) {
-      main {
-        padding: 18px;
-        max-width: 98vw;
-      }
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px 10px 8px 10px;
-      }
-      #logo {
-        height: 80px;
-        margin-bottom: 18px;
-      }
-      /* Hamburger visible for mobile only */
-      .hamburger-menu {
-        display: block;
-      }
-      nav {
-        width: 100%;
-        flex-direction: column;
-        display: none;
-        margin: 12px 0 0 0;
-      }
-      nav.show {
+      .hamburger {
         display: flex;
       }
-      nav a {
-        margin: 14px 0;
+      nav {
+        display: none;
+      }
+      header {
+        flex-direction: row;
+        align-items: center;
+        padding: 14px 8px 8px 8px;
+      }
+      #logo { height: 62px; margin-bottom: 0; margin-right: 18px; }
+      .site-title {
         font-size: 22px;
-        text-align: left;
+        font-weight: 900;
+        letter-spacing: 1.2px;
+        margin-right: auto;
+      }
+      .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0; right: 0; bottom: 0; left: 0;
+        background: rgba(19,29,52,0.96);
+        z-index: 999;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+      }
+      .nav-overlay.active { display: flex; }
+      .nav-menu-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 70px 30px 30px 40px;
+        width: 75vw;
+        height: 100vh;
+        background: #1c2747;
+        box-shadow: -6px 0 30px rgba(0,0,0,0.12);
+      }
+      .nav-menu-mobile a {
+        font-size: 26px;
+        font-weight: bold;
+        color: #eac14f;
+        margin: 20px 0;
+        text-align: right;
+        letter-spacing: 1px;
+        text-decoration: none;
+      }
+      .close-menu {
+        font-size: 36px;
+        color: #eac14f;
+        font-weight: bold;
+        align-self: flex-end;
+        cursor: pointer;
+        margin-bottom: 50px;
+        margin-top: -20px;
+      }
+      main {
+        padding: 0;
+        max-width: 100vw;
+      }
+      .home-hero-container {
+        width: 94vw;
+        max-width: 97vw;
+        margin: 14px auto 18px auto;
+        padding: 18px 12px 18px 12px;
+        border-radius: 15px;
       }
       .car-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
       }
-      .hero-section {
-        flex-direction: column;
+      .car-card {
+        padding: 14px 10px 22px 10px;
+        margin: 0 auto;
+        border-radius: 13px;
+        max-width: 320px;
+        width: 94vw;
+        transition: transform 0.3s, box-shadow 0.3s;
       }
-      .hero-image {
-        text-align: center;
+      .car-card img {
+        max-height: 115px;
+        height: 28vw;
+        min-height: 78px;
       }
+      .car-card strong { font-size: 20px; margin-bottom: 8px; }
+      .car-card div { font-size: 13.5px; }
+      .hero-section { flex-direction: column; gap: 18px; }
+      .hero-image { text-align: center; margin-top: 32px; }
       .welcome-title {
-        font-size: 32px;
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 1.1px;
+        color: #eac14f;
+        text-align: center;
+        margin-bottom: 12px;
       }
-      .features-grid {
-        grid-template-columns: 1fr;
+      .features-grid { grid-template-columns: 1fr; }
+      .contact-details {
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+        color: #eac14f;
       }
-    }
-    @media (min-width: 801px) {
-      .hamburger-menu {
-        display: none;
+      .about-text {
+        font-size: 15px;
+        text-align: justify;
+        margin-bottom: 12px;
+        padding-left: 0;
+        padding-right: 0;
       }
-      nav {
-        display: flex !important;
+      .about-list {
+        font-size: 14px;
+        color: #eac14f;
+        padding-left: 20px;
+        margin-top: 0;
+        margin-bottom: 0;
+        text-align: left;
       }
+      .about-list li { margin-bottom: 5px; line-height: 1.5; }
     }
   </style>
 </head>
 <body>
   <header>
     <img src="TC-Websitepurpose.png" id="logo" alt="Teenu Cabs Logo">
-    <button class="hamburger-menu" onclick="toggleNav()">☰</button>
-    <nav id="main-nav">
+    <span class="site-title">Teenu Cabs</span>
+    <div class="hamburger" onclick="openMenu()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav>
       <a href="#home">Home</a>
       <a href="#services">Our Services</a>
       <a href="#why-choose-us">Why Choose Us</a>
       <a href="#reviews">Reviews</a>
       <a href="#contact">Contact Us</a>
     </nav>
+    <div id="navOverlay" class="nav-overlay">
+      <div class="nav-menu-mobile">
+        <span class="close-menu" onclick="closeMenu()">&times;</span>
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#services" onclick="closeMenu()">Our Services</a>
+        <a href="#why-choose-us" onclick="closeMenu()">Why Choose Us</a>
+        <a href="#reviews" onclick="closeMenu()">Reviews</a>
+        <a href="#contact" onclick="closeMenu()">Contact Us</a>
+      </div>
+    </div>
   </header>
   <main>
     <!-- Home Section -->
     <section id="home">
-      <div class="hero-section">
-        <div class="hero-text">
-          <h1 class="welcome-title">Welcome to Teenu Cabs</h1>
-          <div class="contact-details">
-            <h2>Contact : +91-9876543210</h2> 
+      <div class="home-hero-container">
+        <div class="hero-section">
+          <div class="hero-text">
+            <h1 class="welcome-title"><strong>Welcome to Teenu Cabs</strong></h1>
+            <div class="about">
+              <h2 style="text-align: center;">About Us</h2>
+              <p class="about-text">
+                Teenu Cabs is Chennai's trusted car rental service providing reliable, comfortable, and safe rides since 2020.
+                Whether you need airport transfers, city sightseeing or outstation travel, our diverse fleet and professional drivers are here for you!!
+              </p>
+              <ul class="about-list">
+                <li>Wide range of cars to suit every need</li>
+                <li>Competitive pricing for daily and weekly rentals</li>
+                <li>24/7 customer support</li>
+              </ul>
+            </div>
           </div>
-          <div class="about">
-            <h2>About Us</h2>
-<pre style="font-size: 18px; line-height:1.6; font-family:'Segoe-ui';">
-Teenu Cabs is Chennai's trusted car rental service providing reliable, comfortable,
-and safe rides since 2020. Whether you need airport transfers, city sightseeing or 
-outstation travel, our diverse fleet and professional drivers are here for you !!
-</pre>
-            <ul>
-              <li>Wide range of cars to suit every need</li>
-              <li>Competitive pricing for daily and weekly rentals</li>
-              <li>24/7 customer support</li>
-            </ul>
+          <div class="hero-image">
+            <img src="sample.avif" alt="Luxury Car">
           </div>
-        </div>
-        <div class="hero-image">
-          <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80" alt="Luxury Car">
         </div>
       </div>
     </section>
-    
+
     <!-- Our Services Section -->
     <section id="services">
-      <h1>Our Services</h1>
+      <h1 style="text-align: center;">Our Services</h1>
       <div class="car-grid">
         <div class="car-card">
           <img src="mini2.avif" alt="Mini">
@@ -369,7 +427,7 @@ outstation travel, our diverse fleet and professional drivers are here for you !
           <div>Spacious and powerful – Great for family and group travel.</div>
         </div>
       </div>
-      <h2>Pricing</h2>
+      <h2 style="text-align: center;">Pricing</h2>
       <table class="pricing-table">
         <thead>
           <tr>
@@ -401,11 +459,11 @@ outstation travel, our diverse fleet and professional drivers are here for you !
         </tbody>
       </table>
     </section>
-    
+
     <!-- Why Choose Us Section -->
     <section id="why-choose-us">
-      <h1>Why Choose Teenu Cabs for your intercity travels?</h1>
-      <h2 style="font-size: 24px; margin-bottom: 30px;">Chennai's Most Reliable CAB Rentals</h2>
+      <h1 style="text-align: center;">Why Choose US?</h1>
+      <h4 style="font-size: 20px; margin-bottom: 30px; text-align: center;">Chennai's Most Reliable CAB Rentals</h4>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">🧾</div>
@@ -451,10 +509,9 @@ outstation travel, our diverse fleet and professional drivers are here for you !
         </div>
       </div>
     </section>
-    
     <!-- Reviews Section -->
     <section id="reviews">
-      <h1>Customer Reviews</h1>
+      <h1 style="text-align: center;">Customer Reviews</h1>
       <div class="review">
         "Fantastic service! The car was clean, comfortable, and the driver was very polite. Will book again."
         <div class="review-author">- Deepak, Chennai</div>
@@ -469,26 +526,26 @@ outstation travel, our diverse fleet and professional drivers are here for you !
       </div>
       <div class="review">
         "Best cab service in Chennai! The driver was on time and very professional. The SUV was very polite and adaptable according to our needs."
-      </div>
+      <div class="review-author">- Sakthi, Chennai</div></div>
       <br>
     </section>
-
+    <!-- Contact Section -->
     <section id="contact">
-      <h1>Contact Us</h1>
-      <p style="font-size: 20px; margin-bottom: 30px; color: #d4c89e;">
-        Get in touch with us for bookings, enquiries, or any assistance. We're here to help you 24/7!
-      </p>
+      <h1 style="text-align: center;">Contact Us</h1>
+      <pre style="font-size: 20px; margin: 30px 20px 30px 20px; text-align: justify-self: unset;; color: #d4c89e;line-height: 1.3;">
+Get in touch with us for bookings, 
+enquiries, or any assistance.
+      </pre>
       <div class="contact-info">
-        <div><strong>📞 Phone :</strong> +91-9876543210</div>
+        <div><strong style="margin-left: 27px;">📞 Phone :</strong> +91-9876543210</div>
         <br>
-        <div><strong>📧 Email :</strong> teenucabs@gmail.com</div>
+        <div><strong style="margin-left: 27px;">📧 Email :</strong> teenucabs@gmail.com</div>
         <br>
-        <div><strong>💬 WhatsApp :</strong> +91-9876543210</div>
+        <div><strong style="margin-left: 27px;">💬 WhatsApp :</strong> +91-9876543210</div>
         <br>
-        <div><strong>📍 Location :</strong> Chennai, Tamil Nadu</div>
+        <div><strong style="margin-left: 27px;">📍 Location :</strong> Chennai, Tamil Nadu</div>
       </div>
-      <br>
-      <br>
+      <br><br>
       <div class="contact-buttons">
         <a href="https://wa.me/919876543210?text=Hello%20Teenu%20Cabs!%20I%20would%20like%20to%20book%20a%20cab." target="_blank" class="whatsapp-btn">
           💬 Connect on WhatsApp
@@ -499,11 +556,14 @@ outstation travel, our diverse fleet and professional drivers are here for you !
       </div>
     </section>
   </main>
-  <!-- Hamburger menu toggle logic -->
   <script>
-    function toggleNav() {
-      const nav = document.getElementById('main-nav');
-      nav.classList.toggle('show');
+    function openMenu() {
+      document.getElementById('navOverlay').classList.add('active');
+      document.body.style.overflow = "hidden";
+    }
+    function closeMenu() {
+      document.getElementById('navOverlay').classList.remove('active');
+      document.body.style.overflow = "";
     }
   </script>
 </body>
