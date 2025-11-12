@@ -54,6 +54,11 @@
       background: transparent;
       border: none;
       padding: 0;
+      position: relative;
+    }
+    .hamburger.active {
+      opacity: 0;
+      pointer-events: none;
     }
     .hamburger .bar {
       width: 80px;
@@ -127,7 +132,7 @@
       line-height: 1.9;
       font-family: 'Segoe UI';
       text-align: justify;
-      margin-bottom: 0;
+      margin-bottom: 18px;
       color: #eac14f;
     }
     .about-list {
@@ -136,9 +141,17 @@
       padding-left: 20px;
       margin-bottom: 0;
       text-align: left;
-      display: none;
     }
     .about-list li { margin-bottom: 6px; line-height: 1.9; }
+    
+    @media (min-width: 801px) {
+      .about-list {
+        display: none;
+      }
+      .about-text {
+        margin-bottom: 0;
+      }
+    }
     .car-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -228,10 +241,7 @@
     }
     .review-author { font-weight: bold; color: #eac14f; margin-top: 10px; font-size: 18px; }
     .contact-info { font-size: 20px; margin-bottom: 18px; }
-    .contact-item { display: none; }
-    .contact-item:nth-child(2),
-    .contact-item:nth-child(3),
-    .contact-item:nth-child(4) { display: block; margin-bottom: 15px; }
+    .contact-item { margin-bottom: 15px; }
     .whatsapp-btn, .mail-btn {
       display: inline-block;
       padding: 12px 24px;
@@ -409,12 +419,22 @@
       .about-text {
         font-size: 15px;
         text-align: justify;
-        margin-bottom: 15px;
-        line-height: 1.9;
+        margin-bottom: 12px;
+        line-height: 1.6;
       }
       
       .about-list {
-        display: none;
+        display: block;
+        font-size: 14px;
+        padding-left: 20px;
+        margin-top: 10px;
+        margin-bottom: 0;
+        text-align: left;
+      }
+      
+      .about-list li {
+        margin-bottom: 8px;
+        line-height: 1.5;
       }
       
       .car-grid {
@@ -499,9 +519,15 @@
       }
       
       .contact-item {
-        display: block !important;
-        margin-bottom: 15px;
+        display: flex !important;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 12px;
         text-align: left;
+      }
+      
+      .contact-item strong {
+        flex-shrink: 0;
       }
       
       .contact-info strong {
@@ -565,8 +591,13 @@
             <div class="about">
               <h2>About Us</h2>
               <p class="about-text">
-                Teenu Cabs is Chennai's trusted car rental service providing reliable, comfortable, and safe rides since 2020. Whether you need airport transfers, city sightseeing or outstation travel, our diverse fleet and professional drivers are here for you! We offer a wide range of cars to suit every need, from compact minis perfect for solo travelers to spacious SUVs ideal for family trips. With competitive pricing for daily and weekly rentals, transparent billing, and 24/7 customer support, we ensure a seamless travel experience. Our well-maintained vehicles and experienced drivers guarantee your safety and comfort throughout your journey.
+                Teenu Cabs is Chennai's trusted car rental service operating since 2020, offering reliable, comfortable, and safe rides for airport transfers, city sightseeing, and outstation travel. We provide a diverse fleet—from compact minis to spacious SUVs—driven by professional and experienced drivers. Our services ensure a seamless travel experience with competitive daily and weekly pricing, transparent billing, well-maintained vehicles, and 24/7 customer support.
               </p>
+              <ul class="about-list">
+                <li>Wide range of cars to suit every need</li>
+                <li>Competitive pricing for daily and weekly rentals</li>
+                <li>24/7 customer support</li>
+              </ul>
             </div>
           </div>
           <div class="hero-image">
@@ -719,10 +750,12 @@
   <script>
     function openMenu() {
       document.getElementById('navOverlay').classList.add('active');
+      document.querySelector('.hamburger').classList.add('active');
       document.body.style.overflow = "hidden";
     }
     function closeMenu() {
       document.getElementById('navOverlay').classList.remove('active');
+      document.querySelector('.hamburger').classList.remove('active');
       document.body.style.overflow = "";
     }
   </script>
