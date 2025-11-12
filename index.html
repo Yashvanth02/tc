@@ -25,8 +25,13 @@
       align-items: center;
       padding: 32px 60px 12px 60px;
       background: #131d34;
-      position: relative;
-      z-index: 10;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      width: 100%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
     #logo { height: 110px; margin-right: 40px; display: block; }
     .site-title {
@@ -76,7 +81,7 @@
     .nav-overlay { display: none; }
     main {
       max-width: 1300px;
-      margin: 50px auto 0;
+      margin: 180px auto 50px;
       background: #1c2747;
       padding: 50px 70px 60px 70px;
       border-radius: 22px;
@@ -119,10 +124,10 @@
     }
     .about-text {
       font-size: 18px;
-      line-height: 1.6;
+      line-height: 1.9;
       font-family: 'Segoe UI';
       text-align: justify;
-      margin-bottom: 18px;
+      margin-bottom: 0;
       color: #eac14f;
     }
     .about-list {
@@ -131,8 +136,9 @@
       padding-left: 20px;
       margin-bottom: 0;
       text-align: left;
+      display: none;
     }
-    .about-list li { margin-bottom: 6px; line-height: 1.55; }
+    .about-list li { margin-bottom: 6px; line-height: 1.9; }
     .car-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -222,6 +228,10 @@
     }
     .review-author { font-weight: bold; color: #eac14f; margin-top: 10px; font-size: 18px; }
     .contact-info { font-size: 20px; margin-bottom: 18px; }
+    .contact-item { display: none; }
+    .contact-item:nth-child(2),
+    .contact-item:nth-child(3),
+    .contact-item:nth-child(4) { display: block; margin-bottom: 15px; }
     .whatsapp-btn, .mail-btn {
       display: inline-block;
       padding: 12px 24px;
@@ -244,34 +254,39 @@
       header {
         flex-direction: row;
         align-items: center;
-        padding: 14px 16px 8px 16px;
+        padding: 12px 16px;
         width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
       }
       
       #logo {
-        height: 62px;
+        height: 50px;
         margin-bottom: 0;
-        margin-right: 18px;
+        margin-right: 12px;
       }
       
       .site-title {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 900;
-        letter-spacing: 1.2px;
+        letter-spacing: 1px;
         margin-right: auto;
       }
       
       .hamburger {
         display: flex;
-        width: 62px;
-        height: 62px;
+        width: 50px;
+        height: 50px;
         margin-left: auto;
+        flex-shrink: 0;
       }
       
       .hamburger .bar {
-        width: 40px;
-        height: 8px;
-        margin: 5px 0;
+        width: 30px;
+        height: 4px;
+        margin: 4px 0;
       }
       
       nav {
@@ -298,7 +313,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        padding: 70px 30px 30px 40px;
+        padding: 100px 30px 30px 40px;
         height: 100vh;
         background: #1c2747;
         box-shadow: -6px 0 30px rgba(0,0,0,0.12);
@@ -306,13 +321,14 @@
         right: 0;
         top: 0;
         width: 75vw;
+        overflow-y: auto;
       }
       
       .nav-menu-mobile a {
-        font-size: 26px;
+        font-size: 24px;
         font-weight: bold;
         color: #eac14f;
-        margin: 20px 0;
+        margin: 18px 0;
         text-align: right;
         letter-spacing: 1px;
         text-decoration: none;
@@ -320,17 +336,26 @@
       }
       
       .close-menu {
-        font-size: 36px;
+        font-size: 40px;
         color: #eac14f;
         font-weight: bold;
         cursor: pointer;
-        margin-bottom: 50px;
-        margin-top: -20px;
-        align-self: flex-end;
+        margin-bottom: 30px;
+        position: fixed;
+        right: 30px;
+        top: 20px;
+        z-index: 1001;
+        background: #1c2747;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
       }
       
       main {
-        margin: 20px 16px;
+        margin: 100px 16px 20px;
         padding: 30px 20px;
         border-radius: 15px;
       }
@@ -385,20 +410,11 @@
         font-size: 15px;
         text-align: justify;
         margin-bottom: 15px;
-        line-height: 1.6;
+        line-height: 1.9;
       }
       
       .about-list {
-        font-size: 14px;
-        padding-left: 20px;
-        margin-top: 10px;
-        margin-bottom: 0;
-        text-align: left;
-      }
-      
-      .about-list li {
-        margin-bottom: 8px;
-        line-height: 1.5;
+        display: none;
       }
       
       .car-grid {
@@ -473,6 +489,7 @@
         text-align: left !important;
         white-space: pre-wrap;
         word-wrap: break-word;
+        font-family: 'Segoe UI' !important;
       }
       
       .contact-info {
@@ -481,7 +498,8 @@
         text-align: left;
       }
       
-      .contact-info div {
+      .contact-item {
+        display: block !important;
         margin-bottom: 15px;
         text-align: left;
       }
@@ -543,18 +561,12 @@
       <div class="home-hero-container">
         <div class="hero-section">
           <div class="hero-text">
-            <h1 class="welcome-title"><strong>Welcome to Teenu Cabs</strong></h1>
+            <h1 class="welcome-title"><strong>Welcome to Teenu Cabs !</strong></h1>
             <div class="about">
               <h2>About Us</h2>
               <p class="about-text">
-                Teenu Cabs is Chennai's trusted car rental service providing reliable, comfortable, and safe rides since 2020.
-                Whether you need airport transfers, city sightseeing or outstation travel, our diverse fleet and professional drivers are here for you!!
+                Teenu Cabs is Chennai's trusted car rental service providing reliable, comfortable, and safe rides since 2020. Whether you need airport transfers, city sightseeing or outstation travel, our diverse fleet and professional drivers are here for you! We offer a wide range of cars to suit every need, from compact minis perfect for solo travelers to spacious SUVs ideal for family trips. With competitive pricing for daily and weekly rentals, transparent billing, and 24/7 customer support, we ensure a seamless travel experience. Our well-maintained vehicles and experienced drivers guarantee your safety and comfort throughout your journey.
               </p>
-              <ul class="about-list">
-                <li>Wide range of cars to suit every need</li>
-                <li>Competitive pricing for daily and weekly rentals</li>
-                <li>24/7 customer support</li>
-              </ul>
             </div>
           </div>
           <div class="hero-image">
@@ -687,13 +699,12 @@
     <!-- Contact Section -->
     <section id="contact">
       <h1>Contact Us</h1>
-      <pre style="font-size: 20px; color: #d4c89e; line-height: 1.4;">Get in touch with us for bookings, 
-enquiries, or any assistance.</pre>
+      <p style="font-size: 18px; color: #d4c89e; line-height: 1.6; margin-bottom: 25px; font-family: 'Segoe UI';">Get in touch with us for bookings, enquiries, or any assistance.</p>
       <div class="contact-info">
-        <div><strong>📞 Phone :</strong> +91-9876543210</div>
-        <div><strong>📧 Email :</strong> teenucabs@gmail.com</div>
-        <div><strong>💬 WhatsApp :</strong> +91-9876543210</div>
-        <div><strong>📍 Location :</strong> Chennai, Tamil Nadu</div>
+        <div class="contact-item"><strong>📞 Phone :</strong> +91-9876543210</div>
+        <div class="contact-item"><strong>📧 Email :</strong> teenucabs@gmail.com</div>
+        <div class="contact-item"><strong>💬 WhatsApp :</strong> +91-9876543210</div>
+        <div class="contact-item"><strong>📍 Location :</strong> Chennai, Tamil Nadu</div>
       </div>
       <div class="contact-buttons">
         <a href="https://wa.me/919876543210?text=Hello%20Teenu%20Cabs!%20I%20would%20like%20to%20book%20a%20cab." target="_blank" class="whatsapp-btn">
